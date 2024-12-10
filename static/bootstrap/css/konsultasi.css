@@ -1,0 +1,33 @@
+.chat-box {
+    height: 400px;
+    overflow-y: auto;
+    background-color: #f8f9fa;
+    padding: 15px;
+    border-radius: 8px;
+    margin-top: 20px;
+}
+
+.ai-response {
+    background-color: #007bff;
+    color: #fff;
+    padding: 10px;
+    border-radius: 8px;
+    margin-bottom: 10px;
+    text-align: left;
+    max-width: 80%;
+}
+
+.user-input {
+    background-color: #e2e3e5;
+    color: #333;
+    padding: 10px;
+    border-radius: 8px;
+    margin-bottom: 10px;
+    text-align: right;
+    max-width: 80%;
+    margin-left: auto;
+}
+
+.input-group {
+    margin-top: 15px;
+}

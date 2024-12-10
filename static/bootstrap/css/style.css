@@ -1,0 +1,322 @@
+/* Background Gray 200 */
+.bg-gray-200 {
+    /* Warna abu-abu yang setara dengan gray-200 */
+    background-color: #e2e8f0;
+}
+
+
+
+/* message sign-up */
+.message-box {
+    position: fixed;
+    top: 30%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    z-index: 10;
+    max-width: 800px; /* Lebar maksimum */
+    width: 90%;
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap; /* Memungkinkan pesan untuk melipat ke baris baru */
+}
+
+/* Kontainer untuk menampung pesan */
+.messages-container {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px; /* Jarak antar pesan */
+}
+
+/* Pesan individual */
+.message-item {
+    width: 100%; /* Secara default pesan akan memenuhi lebar kolom */
+    max-width: 48%; /* Maksimal 48% untuk dua kolom */
+    box-sizing: border-box;
+}
+
+/* Aturan untuk responsivitas: jika ada lebih dari 3 pesan, bagi menjadi lebih banyak kolom */
+@media (min-width: 768px) {
+    .message-item {
+        width: 48%; /* Dua kolom pada layar besar */
+    }
+}
+
+@media (max-width: 768px) {
+    .message-item {
+        width: 100%; /* Pesan akan menempati seluruh lebar pada layar kecil */
+    }
+}
+
+
+
+
+/* Hero Section */
+.custom-img {
+    /* Lebar 75% untuk tampilan kecil */
+    width: 76%;
+}
+
+@media (min-width: 768px) {
+    .custom-img {
+        /* Lebar 100% untuk tampilan medium dan di atasnya */
+        width: 100%;
+    }
+}
+
+
+
+/* Aturan untuk mengubah urutan elemen */
+.order-md-1 {
+    /* Elemen ini akan muncul pertama */
+    order: 1;
+}
+
+.order-md-2 {
+    /* Elemen ini akan muncul kedua */
+    order: 2;
+}
+
+
+
+/* Section */
+.nav-section {
+    padding: 90px 0px;
+}
+
+.features-section {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 90px 24px;
+}
+
+
+
+/* Features */
+.features h5 {
+    margin-bottom: 20px;
+    font-size: 1.5rem;
+}
+
+.features p {
+    font-size: 1rem;
+}
+
+.custom-title {
+    font-size: 1.8rem;
+}
+
+.feature p {
+    font-size: 1.1rem;
+}
+
+.feature-row {
+    display: flex;
+    align-items: center;
+    margin-bottom: 120px;
+    position: relative;
+}
+
+.feature-row:nth-child(even) {
+    flex-direction: row-reverse;
+}
+
+.feature-content {
+    flex: 1;
+    padding: 0 40px;
+}
+
+.feature-image {
+    flex: 1;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.feature-image img {
+    max-width: 100%;
+    height: auto;
+    border-radius: 7px;
+}
+
+.feature-title {
+    font-size: 36px;
+    color: #1e1919;
+    margin-bottom: 20px;
+    font-weight: 500;
+}
+
+.feature-description {
+    font-size: 18px;
+    line-height: 1.6;
+    color: #637381;
+    margin-bottom: 24px;
+}
+
+.learn-more {
+    display: inline-flex;
+    align-items: center;
+    color: #0061ff;
+    text-decoration: none;
+    font-size: 16px;
+    font-weight: 500;
+}
+
+.learn-more svg {
+    margin-right: 8px;
+}
+
+.learn-more:hover {
+    text-decoration: underline;
+}
+
+@media (max-width: 991.98px) {
+    .navbar-nav {
+        padding: 1.5rem 0;
+    }
+
+    .nav-link {
+        padding: 0.75rem 1rem;
+        text-align: center;
+    }
+
+    .nav-link:hover {
+        background-color: rgba(255, 255, 255, 0.1);
+        border-radius: 4px;
+    }
+}
+
+@media (min-width: 992px) {
+    .nav-link {
+        position: relative;
+    }
+
+    .nav-link::after {
+        content: '';
+        position: absolute;
+        width: 0;
+        height: 2px;
+        bottom: 0;
+        left: 50%;
+        background-color: white;
+        transition: all 0.3s ease;
+        transform: translateX(-50%);
+    }
+
+    .nav-link:hover::after {
+        width: 70%;
+    }
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+    .order-md-1 {
+        /* Elemen ini akan muncul kedua */
+        order: 2;
+    }
+
+    .order-md-2 {
+        /* Elemen ini akan muncul pertama */
+        order: 1;
+    }
+
+    /* Section */
+    .nav-section {
+        padding: 88px 0px;
+    }
+
+    .features-section {
+        max-width: 1200px;
+        margin: 0 auto;
+        padding: 88px 24px;
+    }
+
+    /* Features */
+    .feature-row,
+    .feature-row:nth-child(even) {
+        flex-direction: column;
+        text-align: center;
+        margin-bottom: 80px;
+    }
+
+    .feature-content {
+        padding: 0;
+        margin-bottom: 40px;
+    }
+
+    .feature-title {
+        font-size: 28px;
+    }
+
+    .feature-description {
+        font-size: 16px;
+    }
+
+    .learn-more {
+        justify-content: center;
+    }
+}
+
+
+
+/* Login & Sign Up */
+.back-link {
+    position: absolute;
+    top: 20px;
+    left: 20px;
+    color: white;
+    text-decoration: none;
+    display: flex;
+    align-items: center;
+}
+
+.back-link i {
+    font-size: 1.5rem;
+    margin-right: 5px;
+}
+
+.login-box {
+    background-color: white;
+    padding: 2rem;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    /* Teks di dalam kotak jadi abu */
+    color: grey;
+}
+
+.icon-input {
+    position: relative;
+}
+
+.icon-input i {
+    position: absolute;
+    left: 10px;
+    top: 50%;
+    transform: translateY(-50%);
+}
+
+.form-control {
+    padding-left: 35px;
+    /* Warna teks dalam input jadi abu */
+    color: grey;
+}
+
+.form-control::placeholder {
+    /* Placeholder tetap abu-abu */
+    color: #6c757d;
+}
+
+.btn-primary {
+    background-color: blue;
+    border: none;
+    /* Teks di tombol tetap putih */
+    color: white;
+}
+
+a {
+    /* Link tetap biru */
+    color: blue;
+}
+
+a:hover {
+    color: darkblue;
+}

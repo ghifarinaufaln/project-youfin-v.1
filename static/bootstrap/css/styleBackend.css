@@ -1,0 +1,535 @@
+@import url("https://cdnjs.cloudflare.com/ajax/libs/meyer-reset/2.0/reset.min.css");
+
+/* Base styles and resets */
+* {
+    -webkit-font-smoothing: antialiased;
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+html,
+body {
+    margin: 0;
+    padding: 0;
+    height: 100%;
+    width: 100%;
+    font-family: "Inter", sans-serif;
+    background-color: #f5f5f5;
+}
+
+/* Modern Interactive Sidebar Styles */
+:root {
+    --sidebar-width: 280px;
+    --sidebar-collapsed-width: 70px;
+    --primary-color: #2c4050;
+    --secondary-color: #34495E;
+    --hover-color: #3498DB;
+    --text-color: #ECF0F1;
+    --transition-speed: 0.3s;
+}
+
+.sidebar-container {
+    position: fixed;
+    height: 100vh;
+    background: var(--primary-color);
+    transition: var(--transition-speed);
+    overflow-x: hidden;
+    z-index: 1040;
+    width: var(--sidebar-width);
+    box-shadow: 2px 0 10px rgba(0, 0, 0, 0.1);
+}
+
+.sidebar-container.collapsed {
+    width: var(--sidebar-collapsed-width);
+}
+
+.sidebar-logo {
+    height: 70px;
+    padding: 15px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.menu-item.settings {
+    margin-top: 20px;
+    border-top: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 0px;
+}
+
+@media (min-width: 992px) {
+    .sidebar-logo {
+        display: flex;
+        align-items: center;
+        justify-content: flex-start;
+        gap: 20px;
+    }
+}
+
+.sidebar-logo img {
+    width: 40px;
+    height: 40px;
+    object-fit: contain;
+}
+
+.sidebar-logo .logo-text {
+    color: var(--text-color);
+    font-size: 1.5rem;
+    font-weight: 600;
+    transition: var(--transition-speed);
+}
+
+.collapsed .logo-text {
+    opacity: 0;
+    width: 0;
+}
+
+.menu-list {
+    padding: 0;
+    margin: 0;
+    list-style: none;
+}
+
+.menu-item {
+    position: relative;
+    margin: 5px 10px;
+    border-radius: 8px;
+}
+
+.menu-link {
+    display: flex;
+    align-items: center;
+    color: var(--text-color);
+    padding: 12px 15px;
+    text-decoration: none;
+    transition: var(--transition-speed);
+    border-radius: 8px;
+    position: relative;
+    overflow: hidden;
+}
+
+.menu-link:before {
+    content: '';
+    position: absolute;
+    left: 0;
+    top: 0;
+    height: 100%;
+    width: 0;
+    background: var(--hover-color);
+    z-index: -1;
+    transition: var(--transition-speed);
+    opacity: 0.2;
+}
+
+.menu-link:hover:before,
+.menu-link.active:before {
+    width: 100%;
+}
+
+.menu-icon {
+    width: 24px;
+    height: 24px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.2rem;
+    transition: var(--transition-speed);
+}
+
+.menu-text {
+    margin-left: 15px;
+    transition: var(--transition-speed);
+    white-space: nowrap;
+}
+
+.collapsed .menu-text {
+    opacity: 0;
+    width: 0;
+    margin-left: 0;
+}
+
+.menu-badge {
+    position: absolute;
+    right: 15px;
+    background: var(--hover-color);
+    color: white;
+    padding: 2px 8px;
+    border-radius: 12px;
+    font-size: 0.8rem;
+    transition: var(--transition-speed);
+}
+
+.collapsed .menu-badge {
+    opacity: 0;
+    width: 0;
+}
+
+.main-content {
+    margin-left: var(--sidebar-width);
+    transition: var(--transition-speed);
+    min-height: 100vh;
+}
+
+.main-content.expanded {
+    margin-left: var(--sidebar-collapsed-width);
+}
+
+.submenu {
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height var(--transition-speed);
+    padding-left: 35px;
+}
+
+.submenu.show {
+    max-height: 1000px;
+}
+
+.menu-toggle {
+    background: transparent;
+    border: none;
+    color: var(--text-color);
+    cursor: pointer;
+    padding: 8px;
+    border-radius: 50%;
+    transition: var(--transition-speed);
+}
+
+.menu-toggle:hover {
+    background: rgba(255, 255, 255, 0.1);
+}
+
+/* Tooltip for collapsed state */
+.menu-item .tooltip-text {
+    position: absolute;
+    left: 100%;
+    top: 50%;
+    transform: translateY(-50%);
+    background: var(--secondary-color);
+    color: var(--text-color);
+    padding: 5px 10px;
+    border-radius: 4px;
+    font-size: 0.8rem;
+    opacity: 0;
+    pointer-events: none;
+    transition: var(--transition-speed);
+    white-space: nowrap;
+    z-index: 1050;
+}
+
+.collapsed .menu-item:hover .tooltip-text {
+    opacity: 1;
+    margin-left: 10px;
+}
+
+/* Responsive styles */
+@media (max-width: 992px) {
+    .sidebar-container {
+        transform: translateX(-100%);
+        width: var(--sidebar-width) !important;
+    }
+
+    .sidebar-container.mobile-active {
+        transform: translateX(0);
+    }
+
+    .main-content {
+        margin-left: 0 !important;
+    }
+
+    .overlay {
+        position: fixed;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        background: rgba(0, 0, 0, 0.5);
+        opacity: 0;
+        pointer-events: none;
+        transition: var(--transition-speed);
+        z-index: 1030;
+    }
+
+    .overlay.active {
+        opacity: 1;
+        pointer-events: auto;
+    }
+}
+
+/* Main Container */
+.iphone-pro-max {
+    background-color: #f5f5f5;
+    min-height: 100vh;
+    width: 100%;
+    padding: 16px;
+}
+
+.iphone-pro-max .div {
+    width: 100%;
+    max-width: 1200px;
+    margin: 0 auto;
+    display: grid;
+    grid-template-columns: repeat(12, 1fr);
+    gap: 24px;
+    padding: 16px;
+}
+
+/* Header Section */
+header.bg-primary {
+    grid-column: 1 / -1;
+    width: 100%;
+    background-color: #2C3E50;
+    padding: 16px;
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+}
+
+/* Main Content Grid Layout */
+.iphone-pro-max .overlap {
+    grid-column: 1 / -1;
+    width: 100%;
+    display: grid;
+    grid-template-columns: repeat(12, 1fr);
+    gap: 24px;
+    margin-top: 24px;
+}
+
+/* Rekening Section */
+.iphone-pro-max .content-card {
+    grid-column: 1 / -1;
+    width: 100%;
+    background-color: white;
+    border-radius: 16px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    padding: 24px;
+}
+
+.iphone-pro-max .a-n-rekening {
+    margin-top: 16px;
+    width: 100%;
+}
+
+.iphone-pro-max .overlap-group-2 {
+    width: 100%;
+    background-color: #b1c9efcc;
+    border-radius: 16px;
+    padding: 24px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+/* Transaction Section */
+.iphone-pro-max .transaksi {
+    grid-column: 1 / -1;
+    width: 100%;
+    background-color: white;
+    border-radius: 16px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    padding: 24px;
+}
+
+.iphone-pro-max .group {
+    width: 100%;
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 24px;
+    padding: 16px;
+}
+
+.iphone-pro-max .income,
+.iphone-pro-max .outcome {
+    width: 100%;
+    background-color: #f8f9fa;
+    padding: 20px;
+    border-radius: 12px;
+    text-align: center;
+}
+
+/* Recent Transactions Section */
+.iphone-pro-max .transaksi-terbaru {
+    grid-column: span 12;
+    width: 100%;
+    background-color: white;
+    border-radius: 16px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    padding: 24px;
+}
+
+.iphone-pro-max .group-2 {
+    width: 100%;
+    margin-top: 16px;
+}
+
+.iphone-pro-max .group-3,
+.iphone-pro-max .group-5,
+.iphone-pro-max .group-7 {
+    width: 100%;
+    background-color: #f8f9fa;
+    padding: 16px;
+    border-radius: 12px;
+    margin-bottom: 12px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+/* Budget Section */
+.iphone-pro-max .sisa-anggaran {
+    grid-column: span 12;
+    width: 100%;
+    background-color: white;
+    border-radius: 16px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    padding: 24px;
+}
+
+.iphone-pro-max .group-9 {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    margin-bottom: 12px;
+    position: relative;
+}
+
+/* Icon and Title Layout */
+.iphone-pro-max .budget-header {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    margin-bottom: 8px;
+}
+
+.iphone-pro-max .eating {
+    width: 24px;
+    height: 24px;
+}
+
+.iphone-pro-max .text-wrapper-21 {
+    font-size: 16px;
+    font-weight: 500;
+    color: #2C3E50;
+}
+
+/* Date Layout */
+.iphone-pro-max .date-container {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 4px;
+}
+
+.iphone-pro-max .text-wrapper-17,
+.iphone-pro-max .text-wrapper-20 {
+    font-size: 12px;
+    color: #6c757d;
+}
+
+/* Price Layout */
+.iphone-pro-max .price-container {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 8px;
+}
+
+.iphone-pro-max .text-wrapper-18 {
+    font-size: 14px;
+    color: #2C3E50;
+    text-align: left;
+}
+
+.iphone-pro-max .text-wrapper-19 {
+    font-size: 14px;
+    color: #2C3E50;
+    text-align: right;
+}
+
+/* Progress Bar */
+.iphone-pro-max .rectangle-wrapper {
+    width: 100%;
+    background-color: #e9ecef;
+    border-radius: 4px;
+    height: 8px;
+    margin: 8px 0;
+}
+
+.iphone-pro-max .rectangle-2 {
+    width: 75%;
+    background-color: #b1c9ef;
+    border-radius: 4px;
+    height: 100%;
+}
+
+/* Responsive */
+@media (max-width: 1200px) {
+    .iphone-pro-max .div {
+        padding: 16px;
+        gap: 20px;
+    }
+}
+
+@media (max-width: 992px) {
+
+    .iphone-pro-max .transaksi-terbaru,
+    .iphone-pro-max .sisa-anggaran {
+        grid-column: 1 / -1;
+    }
+
+    .iphone-pro-max .group {
+        grid-template-columns: 1fr;
+    }
+}
+
+@media (max-width: 768px) {
+    .iphone-pro-max {
+        padding: 12px;
+    }
+
+    .iphone-pro-max .div {
+        padding: 12px;
+        gap: 16px;
+    }
+
+    .iphone-pro-max .overlap-group-2 {
+        flex-direction: column;
+        text-align: center;
+        gap: 12px;
+        padding: 20px;
+    }
+
+    .iphone-pro-max .content-card,
+    .iphone-pro-max .transaksi,
+    .iphone-pro-max .transaksi-terbaru,
+    .iphone-pro-max .sisa-anggaran {
+        padding: 20px;
+    }
+}
+
+@media (max-width: 576px) {
+    .iphone-pro-max {
+        padding: 8px;
+    }
+
+    .iphone-pro-max .div {
+        padding: 8px;
+        gap: 12px;
+    }
+
+    .iphone-pro-max .group-3,
+    .iphone-pro-max .group-5,
+    .iphone-pro-max .group-7 {
+        flex-direction: column;
+        text-align: center;
+        gap: 8px;
+        padding: 16px;
+    }
+
+    .iphone-pro-max .content-card,
+    .iphone-pro-max .transaksi,
+    .iphone-pro-max .transaksi-terbaru,
+    .iphone-pro-max .sisa-anggaran {
+        padding: 16px;
+    }
+}
